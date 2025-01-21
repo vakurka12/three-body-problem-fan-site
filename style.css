@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --space-black: #0a0a0a;
+  --sophon-green: #00ff9d;
+  --sun-red: #ff3b3b;
+  --sun-orange: #ff7b00;
+  --sun-yellow: #ffd700;
+  --text-color: #ffffff;
+}
+
+body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  color: var(--text-color);
+  font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Навигация */
+.nav {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav__item {
+  padding: 10px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+.nav__item:hover {
+  color: var(--sophon-green);
+  transform: translateX(-5px);
+}
+
+.nav__item.active {
+  color: var(--sophon-green);
+  border-left: 2px solid var(--sophon-green);
+}
+
+/* Секции */
+.section {
+  min-height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.section.active {
+  display: flex;
+}
+
+/* Контент секций */
+.section-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.section__title {
+  text-align: center;
+  color: var(--sophon-green);
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+}
+
+/* Главная секция */
+.title {
+  text-align: center;
+  z-index: 2;
+}
+
+.main-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.author {
+  font-size: 1.5rem;
+  color: var(--sophon-green);
+}
+
+/* Солнечная система на главной */
+.solar-system {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.sun {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  filter: blur(5px);
+}
+
+.sun--1 {
+  background: var(--sun-red);
+  box-shadow: 0 0 20px var(--sun-red);
+  animation: orbit1 20s infinite linear;
+}
+
+.sun--2 {
+  background: var(--sun-orange);
+  box-shadow: 0 0 20px var(--sun-orange);
+  animation: orbit2 25s infinite linear;
+}
+
+.sun--3 {
+  background: var(--sun-yellow);
+  box-shadow: 0 0 20px var(--sun-yellow);
+  animation: orbit3 30s infinite linear;
+}
+
+/* Система трех тел */
+.three-body-system {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.three-body-sun {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  filter: blur(8px);
+  left: 50%;
+  top: 50%;
+  transform-origin: center;
+}
+
+.three-body-sun--1 {
+  background: var(--sun-red);
+  box-shadow: 0 0 60px var(--sun-red);
+  animation: orbit-large1 25s infinite linear;
+}
+
+.three-body-sun--2 {
+  background: var(--sun-orange);
+  box-shadow: 0 0 60px var(--sun-orange);
+  animation: orbit-large2 30s infinite linear;
+}
+
+.three-body-sun--3 {
+  background: var(--sun-yellow);
+  box-shadow: 0 0 60px var(--sun-yellow);
+  animation: orbit-large3 35s infinite linear;
+}
+
+/* Цитаты */
+.quote {
+  margin: 0.5rem 0 1.5rem;
+  padding: 1.5rem;
+  border-left: 4px solid var(--sophon-green);
+  font-style: italic;
+  font-size: 1.2rem;
+  position: relative;
+  background: rgba(0, 255, 157, 0.05);
+  border-radius: 0 8px 8px 0;
+  transition: all 0.3s ease;
+}
+
+.quote:hover {
+  transform: translateX(10px);
+  background: rgba(0, 255, 157, 0.1);
+}
+
+/* Главы */
+.chapter {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.chapter__title {
+  color: var(--sophon-green);
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  text-shadow: 0 0 5px rgba(0, 255, 157, 0.3);
+}
+
+.chapter p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+/* Темный лес */
+.vanishing-text {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dark-forest-chapter:hover .vanishing-text {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+/* Звездное поле */
+.starfield {
+  position: fixed;
+  width: 100%;
+  height: 300%;
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px #fff;
+  opacity: 0.8;
+  filter: blur(1px);
+}
+
+/* Анимации */
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(120deg) translateX(150px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(150px) rotate(-480deg); }
+}
+
+@keyframes orbit3 {
+  from { transform: rotate(240deg) translateX(200px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(200px) rotate(-600deg); }
+}
+
+@keyframes orbit-large1 {
+  from { transform: rotate(0deg) translateX(300px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(300px) rotate(-360deg); }
+}
+
+@keyframes orbit-large2 {
+  from { transform: rotate(120deg) translateX(300px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(300px) rotate(-480deg); }
+}
+
+@keyframes orbit-large3 {
+  from { transform: rotate(240deg) translateX(300px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(300px) rotate(-600deg); }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0.2; transform: scale(0.8); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .section-content {
+    padding: 1rem;
+  }
+
+  .quote {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .section__title {
+    font-size: 2rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .nav {
+    top: 10px;
+    right: 10px;
+  }
+
+  .chapter__title {
+    font-size: 1.5rem;
+  }
+
+  .chapter p {
+    font-size: 0.9rem;
+  }
+}
