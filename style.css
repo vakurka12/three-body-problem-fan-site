@@ -110,6 +110,15 @@ body {
   color: var(--sophon-green);
 }
 
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 .interaction-hint {
   text-align: center;
   color: var(--sophon-green);
@@ -187,36 +196,6 @@ body {
   background: var(--sun-yellow);
   box-shadow: 0 0 60px var(--sun-yellow);
   animation: orbit-large3 35s infinite linear;
-}
-
-/* Цитаты */
-.quote {
-  font-size: 1rem;
-  font-style: italic;
-  color: var(--text-color);
-  padding: 1.5rem;
-  border-left: 3px solid var(--sophon-green);
-  margin: 1.5rem 0;
-  background: rgba(0, 255, 157, 0.05);
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.quote:hover {
-  transform: translateX(10px);
-  background: rgba(0, 255, 157, 0.1);
-  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
-}
-
-.quote::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  background: var(--sophon-green);
-  box-shadow: 0 0 10px var(--sophon-green);
 }
 
 /* Главы */
@@ -403,14 +382,47 @@ body {
   }
 }
 
+/* Кометы */
+.comet {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+  transform-origin: left center;
+  animation: cometMove linear infinite;
+}
+
+.comet::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+  transform: translateY(-50%);
+}
+
+@keyframes cometMove {
+  0% {
+    transform: translateX(-100px) rotate(var(--angle));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 200px)) rotate(var(--angle));
+    opacity: 0;
+  }
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   .section-content {
-    padding: 1rem;
-  }
-
-  .quote {
-    font-size: 1rem;
     padding: 1rem;
   }
 
@@ -419,7 +431,15 @@ body {
   }
 
   .main-title {
-    font-size: 2rem;
+    font-size: 3rem;
+  }
+
+  .author {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
   }
 
   .nav {
