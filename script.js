@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       star.className = 'star';
       star.style.left = `${Math.random() * 100}%`;
       star.style.top = `${Math.random() * 100}%`;
-      star.style.animation = `twinkle ${Math.random() * 2 + 2}s infinite`;
+      star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite ease-in-out`;
       starfield.appendChild(star);
     }
   }
@@ -177,10 +177,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
-  // Обработчик клика для перемешивания текста
+  // Функция для создания эффекта глитча
+  function applyGlitchEffect(element) {
+    const text = element.textContent;
+    element.setAttribute('data-text', text);
+    element.classList.add('glitch');
+    
+    setTimeout(() => {
+      element.classList.remove('glitch');
+      element.removeAttribute('data-text');
+    }, 2000);
+  }
+
+  // Обработчик клика для эффекта глитча в разделе "Задача трёх тел"
   document.querySelector('.section--three-body').addEventListener('click', (e) => {
     if (e.target.tagName === 'P' || e.target.classList.contains('quote')) {
-      scrambleText(e.target);
+      applyGlitchEffect(e.target);
+      setTimeout(() => {
+        scrambleText(e.target);
+      }, 2000);
     }
   });
 
