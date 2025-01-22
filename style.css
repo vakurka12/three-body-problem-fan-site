@@ -455,3 +455,40 @@ body {
     font-size: 0.9rem;
   }
 }
+
+/* Цитаты */
+.quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-color);
+  padding: 1.5rem;
+  border-left: 3px solid var(--sophon-green);
+  margin: 1.5rem 0;
+  background: rgba(0, 255, 157, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.quote:hover {
+  transform: translateX(10px);
+  background: rgba(0, 255, 157, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+}
+
+.quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--sophon-green);
+  box-shadow: 0 0 10px var(--sophon-green);
+}
+
+@media (max-width: 768px) {
+  .quote {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
