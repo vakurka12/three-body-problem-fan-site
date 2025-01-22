@@ -110,6 +110,14 @@ body {
   color: var(--sophon-green);
 }
 
+.interaction-hint {
+  text-align: center;
+  color: var(--sophon-green);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
 /* Солнечная система на главной */
 .solar-system {
   position: absolute;
@@ -183,20 +191,32 @@ body {
 
 /* Цитаты */
 .quote {
-  margin: 0.5rem 0 1.5rem;
-  padding: 1.5rem;
-  border-left: 4px solid var(--sophon-green);
+  font-size: 1rem;
   font-style: italic;
-  font-size: 1.2rem;
-  position: relative;
+  color: var(--text-color);
+  padding: 1.5rem;
+  border-left: 3px solid var(--sophon-green);
+  margin: 1.5rem 0;
   background: rgba(0, 255, 157, 0.05);
-  border-radius: 0 8px 8px 0;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .quote:hover {
   transform: translateX(10px);
   background: rgba(0, 255, 157, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+}
+
+.quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--sophon-green);
+  box-shadow: 0 0 10px var(--sophon-green);
 }
 
 /* Главы */
@@ -230,11 +250,10 @@ body {
   transform: translateX(20px);
 }
 
-/* Звездное поле */
 .starfield {
-  position: fixed;
+  position: absolute; /* меняем с fixed на absolute */
   width: 100%;
-  height: 300%;
+  height: 100%;
   z-index: 1;
   overflow: hidden;
   background: transparent;
@@ -249,6 +268,80 @@ body {
   box-shadow: 0 0 10px #fff;
   opacity: 0.8;
   filter: blur(1px);
+}
+
+/* Контейнеры для планет */
+.planets-container {
+  position: absolute; /* меняем с fixed на absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: all;
+}
+
+.planets-left,
+.planets-right {
+  position: absolute; /* меняем с fixed на absolute */
+  top: 0;
+  height: 100%;
+  width: calc((100% - 800px) / 2);
+  pointer-events: all;
+}
+
+.planets-left {
+  left: 0;
+}
+
+.planets-right {
+  right: 0;
+}
+
+/* Стили для планет */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.planet:hover {
+  transform: scale(1.1);
+}
+
+/* Медиа-запрос для адаптивности */
+@media (max-width: 1400px) {
+  .planets-container {
+    width: 100%;
+  }
+}
+
+.explosion {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: white;
+  clip-path: polygon(
+    50% 0%,    /* верх */
+    61% 35%,   /* верх-право 1 */
+    85% 15%,   /* верх-право 2 */
+    65% 40%,   /* право-верх 1 */
+    100% 50%,  /* право */
+    65% 60%,   /* право-низ 1 */
+    85% 85%,   /* низ-право 2 */
+    61% 65%,   /* низ-право 1 */
+    50% 100%,  /* низ */
+    39% 65%,   /* низ-лево 1 */
+    15% 85%,   /* низ-лево 2 */
+    35% 60%,   /* лево-низ 1 */
+    0% 50%,    /* лево */
+    35% 40%,   /* лево-верх 1 */
+    15% 15%,   /* верх-лево 2 */
+    39% 35%    /* верх-лево 1 */
+  );
+  z-index: 1;
+  animation: explode 0.5s ease-out forwards;
 }
 
 /* Анимации */
@@ -283,9 +376,31 @@ body {
 }
 
 @keyframes twinkle {
-  0% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 0.8; transform: scale(1); }
-  100% { opacity: 0.2; transform: scale(0.8); }
+  0% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0.1);
+    background: white;
+  }
+  25% {
+    background: #fff700;
+  }
+  50% {
+    background: #ffa200;
+    transform: scale(1.5);
+  }
+  75% {
+    background: #ff0000;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+    background: #ff0000;
+  }
 }
 
 /* Адаптивность */
